@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
 import Login from "./pages/Login.tsx";
 import {RouteLayout} from "./components/RouteLayout.tsx";
+import Signup from "./pages/SignUp.tsx";
 
 function App() {
 
@@ -13,6 +14,10 @@ function App() {
                 {
                     path: '/',
                     element: <Login/>,
+                },
+                {
+                    path: 'signup',
+                    element: <Signup/>,
                 }
             ],
         },
