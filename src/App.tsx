@@ -3,6 +3,7 @@ import './index.css';
 import Login from "./pages/Login.tsx";
 import {RouteLayout} from "./components/RouteLayout.tsx";
 import Signup from "./pages/SignUp.tsx";
+import Dashboard from "./pages/Dashboard.tsx";
 
 function App() {
 
@@ -18,6 +19,10 @@ function App() {
                 {
                     path: 'signup',
                     element: <Signup/>,
+                },
+                {
+                    path: 'dashboard',
+                    element: <Dashboard/>,
                 }
             ],
         },
