@@ -4,6 +4,7 @@ import Login from "./pages/Login.tsx";
 import {RouteLayout} from "./components/RouteLayout.tsx";
 import Signup from "./pages/SignUp.tsx";
 import Dashboard from "./pages/Dashboard.tsx";
+import ManageBooks from "./pages/ManageBooks.tsx";
 
 function App() {
 
@@ -23,7 +24,11 @@ function App() {
                 {
                     path: 'dashboard',
                     element: <Dashboard/>,
-                }
+                },
+                {
+                    path: 'manage-books',
+                    element: <ManageBooks/>,
+                },
             ],
         },
     ]);
