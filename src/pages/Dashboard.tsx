@@ -11,9 +11,9 @@ function Dashboard() {
 
     return (
         <div
-            className="min-h-screen relative"
+            className="min-h-screen relative bg-blue-300"
             style={{
-                backgroundImage: "url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=2000&auto=format&fit=crop&q=80')",
+                backgroundImage: "url('src/assets/images/11.png')",
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 backgroundAttachment: 'fixed'
@@ -38,17 +38,17 @@ function Dashboard() {
                                 <span>Manage Books</span>
                             </button>
                             <button className="flex items-center space-x-2 px-4 py-2 bg-blue-500 text-white rounded-3xl font-bold hover:bg-blue-600 transition duration-200"
-                                    onClick={() => navigate('/dashboard')}>
+                                    onClick={() => navigate('/manage-members')}>
                                 <img src={Member} alt='Member' className="w-8"/>
                                 <span>Manage Members</span>
                             </button>
                             <button className="flex items-center space-x-2 px-4 py-2 bg-blue-500 text-white rounded-3xl font-bold hover:bg-blue-600 transition duration-200"
-                                    onClick={() => navigate('/dashboard')}>
+                                    onClick={() => navigate('/borrow-books')}>
                                 <img src={BBooks} alt='Book' className="h-8"/>
                                 <span>Borrow Books</span>
                             </button>
                             <button className="flex items-center space-x-2 px-4 py-2 bg-blue-500 text-white rounded-3xl font-bold hover:bg-blue-600 transition duration-200"
-                                    onClick={() => navigate('/dashboard')}>
+                                    onClick={() => navigate('/return-books')}>
                                 <img src={RBooks} alt='Books' className="h-8"/>
                                 <span>Return Books</span>
                             </button>
