@@ -7,6 +7,8 @@ import AddMemberModal from "../components/AddMemberModel.tsx";
 import EditMemberModal from "../components/UpdateMemberModel.tsx";
 import ArrowLeft from "../assets/icons/left-2-100.png";
 import Add from "../assets/icons/add-96.png";
+import updateicon from "../assets/icons/update-96.png";
+import deleteicon from "../assets/icons/trash-90.png";
 import { useNavigate } from "react-router-dom";
 
 function ManageMembers() {
@@ -61,40 +63,47 @@ function ManageMembers() {
                     </div>
                 </header>
                 <main className="container mx-auto px-4 py-8">
-                    <table className="min-w-full table-auto border-collapse mt-6">
+                    <table className="w-full p-6 text-xs text-left whitespace-nowrap">
+                        <colgroup>
+                            <col className="w-5" />
+                            <col />
+                            <col />
+                            <col />
+                            <col />
+                            <col className="w-5" />
+                        </colgroup>
                         <thead>
-                        <tr className="bg-gray-100">
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Status</th>
-                            <th>Actions</th>
+                        <tr className="dark:bg-gray-300 text-center text-lg">
+                            <th className="p-3 px-6">ID</th>
+                            <th className="p-3">Name</th>
+                            <th className="p-3">Email</th>
+                            <th className="p-3">Phone</th>
+                            <th className="p-3">Status</th>
+                            <th className="p-3 px-6">Actions</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="border-b dark:bg-gray-50 dark:border-gray-300 text-center">
                         {members.map((member) => (
                             <tr
                                 key={member.id}
-                                onClick={() => {
-                                    setSelectedMember(member);
-                                }}
+                                onClick={() => setSelectedMember(member)}
                                 className="hover:bg-gray-50 cursor-pointer"
                             >
-                                <td>{member.id}</td>
-                                <td>{member.name}</td>
-                                <td>{member.email}</td>
-                                <td>{member.phoneNumber}</td>
-                                <td>{member.status}</td>
-                                <td className="flex space-x-2">
+                                <td className="px-3 py-2 text-xl font-medium dark:text-gray-600">{member.id}</td>
+                                <td className="px-3 py-2 text-lg font-medium">{member.name}</td>
+                                <td className="px-3 py-2 text-lg font-medium">{member.email}</td>
+                                <td className="px-3 py-2 text-lg font-medium">{member.phoneNumber}</td>
+                                <td className="px-3 py-2 text-lg font-medium">{member.status}</td>
+                                <td className="px-3 py-2 flex space-x-2">
                                     <button
                                         onClick={(e) => {
                                             e.stopPropagation();
                                             handleDelete(member.id);
                                         }}
-                                        className="bg-red-500 text-white p-2 rounded"
+                                        className="p-1 rounded-full dark:text-gray-400 hover:dark:bg-gray-300 focus:dark:bg-gray-300"
+                                        title="Delete"
                                     >
-                                        Delete
+                                        <img src={deleteicon} alt="delete" className="w-5 h-5"/>
                                     </button>
                                     <button
                                         onClick={(e) => {
@@ -102,9 +111,10 @@ function ManageMembers() {
                                             setSelectedMember(member);
                                             setIsEditModalOpen(true);
                                         }}
-                                        className="bg-yellow-400 text-black p-2 rounded"
+                                        className="p-1 rounded-full dark:text-gray-400 hover:dark:bg-gray-300 focus:dark:bg-gray-300"
+                                        title="Edit"
                                     >
-                                        Update
+                                        <img src={updateicon} alt="update" className="h-5 w-5"/>
                                     </button>
                                 </td>
                             </tr>
