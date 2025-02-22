@@ -37,15 +37,16 @@ export const getAllBooks = createAsyncThunk(
 
 export const updateBook = createAsyncThunk(
     'book/update',
-    async (book: BookModel) => {
+    async ({ bookId, bookData }: { bookId: number; bookData: FormData }) => {
         try {
-            const response = await api.put(`/update/${book.id}`, book);
+            const response = await api.put(`/update/${bookId}`, bookData);
             return response.data;
         } catch (error) {
             console.log('Error:', error);
         }
     }
 );
+
 
 export const deleteBook = createAsyncThunk(
     'book/deleteBook',

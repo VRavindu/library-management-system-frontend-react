@@ -13,7 +13,6 @@ function ManageBooks() {
     const navigate = useNavigate();
     const dispatch = useDispatch<AppDispatch>();
 
-    // Default empty array if books is undefined
     const books: BookModel[] = useSelector(
         (state: { book: BookModel[] }) => state.book || []
     );
@@ -61,60 +60,50 @@ function ManageBooks() {
                     </div>
                 </header>
                 <main className="container mx-auto px-4 py-8">
-                    <table className="min-w-full table-auto border-collapse mt-6">
-                        <thead>
-                        <tr className="bg-gray-100">
-                            <th>ID</th>
-                            <th>Title</th>
-                            <th>Author</th>
-                            <th>ISBN</th>
-                            <th>Genre</th>
-                            <th>Quantity</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                         {books.map((book) => (
-                            <tr
-                                key={book.id}
-                                onClick={() => {
-                                    setSelectedBook(book);
-                                }}
-                                className="hover:bg-gray-50 cursor-pointer"
-                            >
-                                <td>{book.id}</td>
-                                <td>{book.title}</td>
-                                <td>{book.author}</td>
-                                <td>{book.isbn}</td>
-                                <td>{book.genre}</td>
-                                <td>{book.quantity}</td>
-                                <td>{book.available}</td>
-                                <td className="flex space-x-2">
-                                    <button
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            handleDelete(book.id);
-                                        }}
-                                        className="bg-red-500 text-white p-2 rounded"
-                                    >
-                                        Delete
-                                    </button>
-                                    <button
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            setSelectedBook(book);
-                                            setIsEditModalOpen(true);
-                                        }}
-                                        className="bg-yellow-400 text-black p-2 rounded"
-                                    >
-                                        Update
-                                    </button>
-                                </td>
-                            </tr>
+                            <div className="max-w-xs bg-blue-200 rounded-2xl shadow-lg hover:shadow-xl cursor-pointer transition-transform transform hover:scale-105">
+                                <img
+                                    src={`http://localhost:3000/uploads/books/${book.imagePath.split('\\').pop()}`}
+                                    alt="book cover"
+                                    className="w-full h-48 object-cover rounded-t-lg"
+                                />
+                                <div className="p-4 text-center">
+                                    <h4 className="text-lg font-semibold text-gray-800">Title: {book.title}</h4>
+                                    <p className="text-sm text-gray-500">Author: {book.author}</p>
+                                    <p className="text-sm text-gray-600">Description: {book.description}</p>
+                                    <div className="mt-4 flex space-x-2 justify-center">
+                                        <button
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                handleDelete(book.id);
+                                            }}
+                                            className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-2xl text-sm"
+                                        >
+                                            Delete
+                                        </button>
+                                        <button
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                setSelectedBook(book);
+                                                console.log(book);
+                                                setIsEditModalOpen(true);
+                                            }}
+                                            className="bg-yellow-400 hover:bg-yellow-500 text-black px-4 py-2 rounded-2xl text-sm"
+                                        >
+                                            Update
+                                        </button>
+                                        <button
+                                            onClick={() => console.log('Viewing book details')}
+                                            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-2xl text-sm"
+                                        >
+                                            View
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         ))}
-                        </tbody>
-                    </table>
+                    </div>
 
                     {isAddModalOpen && <AddBookModal closeModal={() => setIsAddModalOpen(false)} />}
                     {isEditModalOpen && selectedBook && (

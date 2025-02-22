@@ -1,121 +1,48 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { saveBook } from "../slice/BookSlice";
-import { BookModel } from "../model/BookModel";
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { saveBook } from '../slice/BookSlice';
 
 const AddBookModal = ({ closeModal }: { closeModal: () => void }) => {
-    const dispatch = useDispatch();
-    const [book, setBook] = useState<BookModel>({
-        id: 0,
-        title: "",
-        author: "",
-        isbn: "",
-        publishedYear: new Date().getFullYear(),
-        genre: "",
-        quantity: 1,
-        available: 1,
-        description: "",
-    });
+    const [title, setTitle] = useState('');
+    const [author, setAuthor] = useState('');
+    const [isbn, setIsbn] = useState('');
+    const [publishedYear, setPublishedYear] = useState('');
+    const [genre, setGenre] = useState('');
+    const [quantity, setQuantity] = useState(0);
+    const [available, setAvailable] = useState(0);
+    const [description, setDescription] = useState('');
+    const [image, setImage] = useState<File | null>(null);
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        dispatch(saveBook(book)); // Dispatch the saveBook action
-        closeModal(); // Close the modal after saving
+    const dispatch = useDispatch();
+
+    const handleSave = () => {
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append('author', author);
+        formData.append('isbn', isbn);
+        formData.append('publishedYear', publishedYear);
+        formData.append('genre', genre);
+        formData.append('quantity', String(quantity));
+        formData.append('available', String(available));
+        formData.append('description', description);
+        if (image) formData.append('image', image);
+
+        dispatch(saveBook(formData));
+        closeModal();
     };
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-            <div className="bg-white p-6 rounded-lg w-96 shadow-lg">
-                <h2 className="text-xl font-bold mb-4">Add New Book</h2>
-                <form onSubmit={handleSubmit}>
-                    <div className="mb-4">
-                        <label className="block text-sm font-medium">Title:</label>
-                        <input
-                            type="text"
-                            value={book.title}
-                            onChange={(e) => setBook({ ...book, title: e.target.value })}
-                            className="w-full p-2 mt-1 border border-gray-300 rounded-md"
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label className="block text-sm font-medium">Author:</label>
-                        <input
-                            type="text"
-                            value={book.author}
-                            onChange={(e) => setBook({ ...book, author: e.target.value })}
-                            className="w-full p-2 mt-1 border border-gray-300 rounded-md"
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label className="block text-sm font-medium">ISBN:</label>
-                        <input
-                            type="text"
-                            value={book.isbn}
-                            onChange={(e) => setBook({ ...book, isbn: e.target.value })}
-                            className="w-full p-2 mt-1 border border-gray-300 rounded-md"
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label className="block text-sm font-medium">Published Year:</label>
-                        <input
-                            type="number"
-                            value={book.publishedYear}
-                            onChange={(e) => setBook({ ...book, publishedYear: parseInt(e.target.value) })}
-                            className="w-full p-2 mt-1 border border-gray-300 rounded-md"
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label className="block text-sm font-medium">Genre:</label>
-                        <input
-                            type="text"
-                            value={book.genre}
-                            onChange={(e) => setBook({ ...book, genre: e.target.value })}
-                            className="w-full p-2 mt-1 border border-gray-300 rounded-md"
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label className="block text-sm font-medium">Quantity:</label>
-                        <input
-                            type="number"
-                            value={book.quantity}
-                            onChange={(e) => setBook({ ...book, quantity: parseInt(e.target.value) })}
-                            className="w-full p-2 mt-1 border border-gray-300 rounded-md"
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label className="block text-sm font-medium">Available:</label>
-                        <input
-                            type="number"
-                            value={book.available}
-                            onChange={(e) => setBook({ ...book, available: parseInt(e.target.value) })}
-                            className="w-full p-2 mt-1 border border-gray-300 rounded-md"
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label className="block text-sm font-medium">Description:</label>
-                        <textarea
-                            value={book.description}
-                            onChange={(e) => setBook({ ...book, description: e.target.value })}
-                            className="w-full p-2 mt-1 border border-gray-300 rounded-md"
-                        />
-                    </div>
-                    <div className="mb-4 flex justify-between items-center">
-                        <button
-                            type="submit"
-                            className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
-                        >
-                            Add Book
-                        </button>
-                        <button
-                            type="button"
-                            className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
-                            onClick={closeModal}
-                        >
-                            Close
-                        </button>
-                    </div>
-                </form>
-            </div>
+        <div>
+            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" />
+            <input type="text" value={author} onChange={(e) => setAuthor(e.target.value)} placeholder="Author" />
+            <input type="text" value={isbn} onChange={(e) => setIsbn(e.target.value)} placeholder="ISBN" />
+            <input type="text" value={publishedYear} onChange={(e) => setPublishedYear(e.target.value)} placeholder="Published Year" />
+            <input type="text" value={genre} onChange={(e) => setGenre(e.target.value)} placeholder="Genre" />
+            <input type="number" value={quantity} onChange={(e) => setQuantity(Number(e.target.value))} placeholder="Quantity" />
+            <input type="number" value={available} onChange={(e) => setAvailable(Number(e.target.value))} placeholder="Available" />
+            <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Description"></textarea>
+            <input type="file" onChange={(e) => e.target.files && setImage(e.target.files[0])} />
+            <button onClick={handleSave}>Save</button>
         </div>
     );
 };
