@@ -15,7 +15,6 @@ function ManageMembers() {
     const navigate = useNavigate();
     const dispatch = useDispatch<AppDispatch>();
 
-    // Default empty array if members is undefined
     const members: MemberModel[] = useSelector(
         (state: { member: MemberModel[] }) => state.member || []
     );
