@@ -6,6 +6,7 @@ import Signup from "./pages/SignUp.tsx";
 import Dashboard from "./pages/Dashboard.tsx";
 import ManageBooks from "./pages/ManageBooks.tsx";
 import ManageMembers from "./pages/ManageMembers.tsx";
+import BorrowBooks from "./pages/BorrowBooks.tsx";
 
 function App() {
 
@@ -33,6 +34,10 @@ function App() {
                 {
                     path: 'manage-members',
                     element: <ManageMembers/>
+                },
+                {
+                    path: 'borrow-books',
+                    element: <BorrowBooks/>
                 }
             ],
         },
