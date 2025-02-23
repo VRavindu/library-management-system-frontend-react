@@ -7,6 +7,10 @@ import AddBookModal from "../components/AddBookModel.tsx";
 import EditBookModal from "../components/UpdateBookModel.tsx";
 import ArrowLeft from "../assets/icons/left-2-100.png";
 import Add from "../assets/icons/add-96.png";
+import Delete from "../assets/icons/trash-90.png";
+import Update from "../assets/icons/update-96.png";
+import View from "../assets/icons/visibility.svg";
+
 import { useNavigate } from "react-router-dom";
 
 function ManageBooks() {
@@ -69,18 +73,18 @@ function ManageBooks() {
                                     className="w-full h-48 object-cover rounded-t-lg"
                                 />
                                 <div className="p-4 text-center">
-                                    <h4 className="text-lg font-semibold text-gray-800">Title: {book.title}</h4>
-                                    <p className="text-sm text-gray-500">Author: {book.author}</p>
-                                    <p className="text-sm text-gray-600">Description: {book.description}</p>
+                                    <h4 className="text-lg font-semibold text-gray-800">Title : {book.title}</h4>
+                                    <p className="text-sm text-gray-600"><span className="font-medium">Author : </span>{book.author}</p>
+                                    <p className="text-sm text-gray-500"><span className="font-medium">Published Year : </span>{book.publishedYear}</p>
+                                    <p className="text-sm text-gray-500"><span className="font-medium">Genre : </span>{book.genre}</p>
                                     <div className="mt-4 flex space-x-2 justify-center">
                                         <button
                                             onClick={(e) => {
                                                 e.stopPropagation();
                                                 handleDelete(book.id);
                                             }}
-                                            className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-2xl text-sm"
                                         >
-                                            Delete
+                                            <img src={Delete} alt="Delete" className="w-6 hover:w-7"/>
                                         </button>
                                         <button
                                             onClick={(e) => {
@@ -89,15 +93,13 @@ function ManageBooks() {
                                                 console.log(book);
                                                 setIsEditModalOpen(true);
                                             }}
-                                            className="bg-yellow-400 hover:bg-yellow-500 text-black px-4 py-2 rounded-2xl text-sm"
                                         >
-                                            Update
+                                            <img src={Update} alt="Update" className="w-6 hover:w-7"/>
                                         </button>
                                         <button
                                             onClick={() => console.log('Viewing book details')}
-                                            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-2xl text-sm"
                                         >
-                                            View
+                                            <img src={View} alt="View" className="w-6 hover:w-7"/>
                                         </button>
                                     </div>
                                 </div>

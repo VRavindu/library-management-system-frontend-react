@@ -2,15 +2,12 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { BookModel } from "../model/BookModel.ts";
 
-// Define initial state as an empty array
 const initialState: BookModel[] = [];
 
-// Configure Axios API
 const api = axios.create({
-    baseURL: "http://localhost:3000/book" // Adjust to your backend API URL
+    baseURL: "http://localhost:3000/book"
 });
 
-// Create async thunks to interact with the backend
 export const saveBook = createAsyncThunk(
     'book/saveBook',
     async (book: BookModel) => {
