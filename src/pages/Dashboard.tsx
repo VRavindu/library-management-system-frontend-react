@@ -4,6 +4,7 @@ import MBooks from '../assets/icons/books-stack-of-three.png';
 import Member from '../assets/icons/group-users.png';
 import BBooks from '../assets/icons/reading-book.png';
 import Search from '../assets/icons/search.svg';
+import LogOutIcon from '../assets/icons/logout.svg';
 import {useEffect, useState} from "react";
 import {getAllBooks} from "../slice/BookSlice.ts";
 import {useDispatch, useSelector} from "react-redux";
@@ -11,6 +12,7 @@ import {AppDispatch} from "../store/store.ts";
 import {BookModel} from "../model/BookModel.ts";
 import {MemberModel} from "../model/MemberModel.ts";
 import {getAllMembers} from "../slice/MemberSlice.ts";
+import { logOutUser } from '../slice/UserSlice.ts';
 
 function Dashboard() {
     const dispatch = useDispatch<AppDispatch>();
@@ -52,6 +54,15 @@ function Dashboard() {
         dispatch(getAllMembers());
     }, [dispatch]);
 
+    const handleLogout = () => {
+        dispatch(logOutUser());
+        
+        localStorage.removeItem('authToken');
+        sessionStorage.removeItem('authToken');
+        
+        navigate('/');
+    };
+
     return (
         <div
             className="min-h-screen relative bg-blue-300"
@@ -89,6 +100,11 @@ function Dashboard() {
                                     onClick={() => navigate('/borrow-books')}>
                                 <img src={BBooks} alt='Book' className="h-8"/>
                                 <span>Borrow Books</span>
+                            </button>
+                            <button className= 'px-4 py-2'
+                                    onClick={handleLogout}
+                            >
+                                <img src={LogOutIcon} alt="LogOut" className="h-8"/>
                             </button>
                         </div>
                     </div>
